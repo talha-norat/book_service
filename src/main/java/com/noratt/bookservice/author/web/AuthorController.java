@@ -1,7 +1,7 @@
-package com.noratt.bookservice.category.web;
+package com.noratt.bookservice.author.web;
 
-import com.noratt.bookservice.category.Category;
-import com.noratt.bookservice.category.CategoryService;
+import com.noratt.bookservice.author.Author;
+import com.noratt.bookservice.author.AuthorService;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,42 +20,43 @@ import org.springframework.web.bind.annotation.RestController;
  * @author talha
  */
 
-@RequiredArgsConstructor
 @RestController
-@RequestMapping("categories")
-public class CategoryController {
+@RequestMapping("authors")
+@RequiredArgsConstructor
+public class AuthorController {
 
-  private final CategoryService categoryService;
+  private final AuthorService authorService;
 
   @GetMapping
-  public ResponseEntity<?> getAllCategories() {
-    return ResponseEntity.ok(categoryService.getAllCategories());
+  public ResponseEntity<?> getAllAuthors() {
+    return ResponseEntity.ok(authorService.getAllAuthors());
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<?> getById(@PathVariable("id") UUID id) {
-    return ResponseEntity.ok(categoryService.getById(id));
+    return ResponseEntity.ok(authorService.getById(id));
   }
 
   @GetMapping("/findByName")
   public ResponseEntity<?> getById(@RequestParam("name") String name) {
-    return ResponseEntity.ok(categoryService.getByName(name));
+    return ResponseEntity.ok(authorService.getByName(name));
   }
 
   @PostMapping
-  public ResponseEntity<?> createCategory(@RequestBody Category category) {
-    return ResponseEntity.ok(categoryService.createCategory(category));
+  public ResponseEntity<?> createAuthor(@RequestBody Author author) {
+    return ResponseEntity.ok(authorService.createAuthor(author));
   }
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteCategory(@PathVariable("id") UUID id) {
-    categoryService.deleteCategoryById(id);
+  public void deleteAuthor(@PathVariable("id") UUID id) {
+    authorService.deleteAuthorById(id);
   }
 
   @DeleteMapping("/deleteByName")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteCategory(@RequestParam("name") String name) {
-    categoryService.deleteCategoryByName(name);
+  public void deleteAuthor(@RequestParam("name") String name) {
+    authorService.deleteAuthorByName(name);
   }
+
 }
